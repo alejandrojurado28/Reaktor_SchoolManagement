@@ -9,7 +9,7 @@ const seleccionado = ref('');
 
 const cargarCursosEtapas = async () => {
     try {
-        const response = await axios.get('http://localhost:8081/direccion/etapaCursos');
+        const response = await axios.get('http://localhost:8081/direccionVentana3/etapaCursos');
         cursosEtapas.value = response.data;
     } catch (error) {
         console.error('Error al cargar cursos y etapas', error);
