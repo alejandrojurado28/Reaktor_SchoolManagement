@@ -72,8 +72,8 @@ const addBloque = async () => {
     });
 
     console.log("Bloque creado exitosamente:", response.data);
-    asignaturasSeleccionadas.value = []; // Reinicia la selección
-    cargarAsignaturas(); // Recarga la tabla
+    asignaturasSeleccionadas.value = []; 
+    cargarAsignaturas(); 
   } catch (error) {
     errorMensaje.value = "Error al crear el bloque. Intente nuevamente.";
     console.error("Error al crear el bloque:", error.response?.data || error);
@@ -88,16 +88,17 @@ const eliminarBloque = async (asignatura) => {
   errorMensaje.value = "";
 
   try {
-    await axios.delete(`http://localhost:8081/direccionVentana3/bloques`, {
+    await axios.delete(`http://localhost:8081/direccionVentana3/eliminarBloque`, {
       params: {
         curso: props.curso,
         etapa: props.etapa,
         asignatura: asignatura.nombre,
+        grupo: asignatura.grupo
       },
     });
 
     console.log(`Bloque eliminado para la asignatura: ${asignatura.nombre}`);
-    cargarAsignaturas(); // Recarga la tabla
+    cargarAsignaturas();
   } catch (error) {
     errorMensaje.value = "Error al eliminar el bloque. Intente nuevamente.";
     console.error("Error al eliminar el bloque:", error.response?.data || error);
@@ -145,7 +146,6 @@ watch([() => props.curso, () => props.etapa], cargarAsignaturas, { immediate: tr
               {{ asignatura.numeroAlumnosEnGrupo[grupo] || 0 }}
             </td>
             <td class="border border-gray-400 px-4 py-2">
-              <!-- Asegúrate de usar 'bloqueId' si esa es la propiedad correcta -->
               <div v-if="asignatura.bloqueId !== undefined && asignatura.bloqueId !== null">
                 Bloque {{ asignatura.bloqueId }}
                 <button
@@ -155,7 +155,6 @@ watch([() => props.curso, () => props.etapa], cargarAsignaturas, { immediate: tr
                   X
                 </button>
               </div>
-              <!-- Si no tiene bloque -->
               <div v-else class="text-gray-400">Sin bloque</div>
             </td>
           </tr>
@@ -180,5 +179,5 @@ watch([() => props.curso, () => props.etapa], cargarAsignaturas, { immediate: tr
 
 
 <style scoped>
-/* Opcional: Agregar estilos personalizados */
+
 </style>

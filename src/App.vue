@@ -21,5 +21,5 @@ const actualizarSelect = (seleccionado) => {
 </template>
 
 <style>
-/* Estilos adicionales, si son necesarios */
+
 </style>
